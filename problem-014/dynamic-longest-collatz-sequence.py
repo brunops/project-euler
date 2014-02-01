@@ -21,11 +21,8 @@ def longest_collatz_sequence_number(until):
 
   # Use dynamic programming on overlapping subproblems to find solution faster
   def collatz_sequence_size(number):
-    # return size of sequence if already calculated
-    if number in sequence_sizes:
-      return sequence_sizes[number]
-    # recursively calculate new sequence sizes
-    else:
+    # recursively calculate new sequence size if not already calculated
+    if number not in sequence_sizes:
       next = next_collatz_number(number)
       sequence_sizes[number] = 1 + collatz_sequence_size(next)
 
