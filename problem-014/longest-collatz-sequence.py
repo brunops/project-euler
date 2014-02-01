@@ -26,4 +26,18 @@ def collatz_sequence(number):
 
   return sequence
 
-print collatz_sequence(13)
+def longest_collatz_sequence_number(until):
+  longest_sequence_size = 1
+  number = 2
+  for i in range(2, until + 1):
+    seq = collatz_sequence(i)
+    seq_len = len(seq)
+    if (seq_len > longest_sequence_size):
+      longest_sequence_size = seq_len
+      number = i
+
+  return number
+
+print longest_collatz_sequence_number(1000000)
+
+
