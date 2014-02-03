@@ -6,11 +6,18 @@
 # For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
 # 
 # Evaluate the sum of all the amicable numbers under 10000.
+from math import sqrt
+
 def divisors(n):
-  divs = []
-  for i in range(1, n / 2 + 1):
+  divs = [1]
+  for i in range(2, int(sqrt(n)) + 1):
     if n % i == 0:
       divs.append(i)
+      
+      # Check not the exact square root to avoid duplicates
+      # it happens for perfect square numbers
+      if n / i != i:
+        divs.append(n / i)
 
   return divs
   
