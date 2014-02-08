@@ -21,7 +21,7 @@ def has_divisibility_property(number):
 
   for i in range(len(primes)):
     # generate integer with 3 numbers
-    number_slice = int(''.join(splitted_number[i + 1:i + 4]))
+    number_slice = array_to_number(splitted_number[i + 1:i + 4])
 
     if number_slice % primes[i] != 0:
       is_property_present = False
@@ -60,6 +60,23 @@ def next_permutation(elements):
 
   return True
 
+def sum_of_pandigital_numbers_with_divisibility_property(until):
+  elements = range(until)
 
+  total = 0
+  number = array_to_number(elements)
+  if has_divisibility_property(number):
+    total += number
 
-print has_divisibility_property(1406357289)
+  while next_permutation(elements):
+    number = array_to_number(elements)
+    if has_divisibility_property(number):
+      print number
+      total += number
+
+  return total
+
+def array_to_number(elements):
+  return int(''.join(map(str, elements)))
+
+print sum_of_pandigital_numbers_with_divisibility_property(10)
