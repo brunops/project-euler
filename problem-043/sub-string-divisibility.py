@@ -29,4 +29,37 @@ def has_divisibility_property(number):
 
   return is_property_present
 
+# Returns boolean indicating if permutation was successful
+def next_permutation(elements):
+  # find elements suffix index, from right to left
+  suffix_index = len(elements) - 1
+  while (suffix_index > 0 and elements[suffix_index - 1] >= elements[suffix_index]):
+    suffix_index -= 1
+
+  # Return False if already last permutation
+  if suffix_index == 0:
+    return False
+
+  # Define pivot index as first element to the left of the suffix (necessairly smaller)
+  pivot_index = suffix_index - 1
+
+  # Minimize the prefix by swaping the pivot with the smallest number on the suffix that is greater than the pivot
+  # Find smallest number that is greater than the pivot on the suffix
+  smallest_prefix_index = len(elements) - 1
+  while (elements[smallest_prefix_index] <= elements[pivot_index]):
+    smallest_prefix_index -= 1
+
+  # Swap pivot with smallest
+  temp = elements[pivot_index]
+  elements[pivot_index] = elements[smallest_prefix_index]
+  elements[smallest_prefix_index] = temp
+
+  # Make suffix as small as possible because prefix was increased
+  # This can be achieved by reversing the suffix
+  elements[suffix_index:] = elements[suffix_index:][::-1]
+
+  return True
+
+
+
 print has_divisibility_property(1406357289)
