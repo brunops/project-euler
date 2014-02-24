@@ -6,30 +6,12 @@
 
 from math import sqrt
 
-def is_pandigital(number):
-  number = str(number)
-
-  # not pandigital if it contains a 0
-  try:
-    number.index('0')
-    return False
-  except ValueError:
-    # no 0 found, continue..
-    number = list(number)
-    number = map((lambda x: int(x)), number)
-    number.sort()
-
-  return number == range(1, len(number) + 1)
-
 def is_prime(number):
   for x in range(2, int(sqrt(number)) + 2):
     if number % x == 0:
       return False
 
   return True
-
-def is_pandigital_prime(number):
-  return is_pandigital(number) and is_prime(number)
 
 # Returns boolean indicating if permutation was successful
 # Code from problem 24
@@ -85,13 +67,13 @@ def largest_pandigital_prime():
     largest = 0
 
     number_from_elements = int_array_to_number(elements)
-    if is_pandigital_prime(number_from_elements):
+    if is_prime(number_from_elements):
       largest = number_from_elements
 
     # find biggest number for given total number of elements
     while next_permutation(elements):
       number_from_elements = int_array_to_number(elements)
-      if number_from_elements > largest and is_pandigital_prime(number_from_elements):
+      if number_from_elements > largest and is_prime(number_from_elements):
         largest = number_from_elements
 
     # no number with set of characteristics found
