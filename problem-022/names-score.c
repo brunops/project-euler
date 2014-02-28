@@ -31,9 +31,6 @@ int main() {
   names = malloc(6000 * sizeof(char *));
 
   while (fgets(buffer, FILESIZE * sizeof(char), stdin)) {
-    // remove newline of the end of the file
-    buffer[strlen(buffer) - 1] = 0;
-
     token = strtok(buffer, separator);
     while (token != NULL) {
       // remove last quote by shortening token by one
