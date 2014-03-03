@@ -10,7 +10,7 @@
 
 from math import sqrt
 
-def get_divisors(number):
+def divisors(number):
   divisors = [1]
   for i in range(2, int(sqrt(number)) + 1):
     if number % i == 0:
@@ -23,9 +23,8 @@ def get_divisors(number):
 
   return divisors
 
-def is_abundant(number, divisors = None):
-  divisors = divisors or get_divisors(number)
-  return sum(divisors) > number
+def is_abundant(number):
+  return sum(divisors(number)) > number
 
 def can_be_written_as_sum(number, abundant_numbers):
   for num1 in abundant_numbers:
