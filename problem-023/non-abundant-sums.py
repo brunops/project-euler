@@ -27,7 +27,30 @@ def is_abundant(number, divisors = None):
   divisors = divisors or get_divisors(number)
   return sum(divisors) > number
 
+def can_be_written_as_sum(number, abundant_numbers, abundant_numbers_lookup):
+  for num1 in abundant_numbers:
+    if number - num1 in abundant_numbers_lookup:
+      return True
 
-print is_abundant(11)
-print is_abundant(12)
-print is_abundant(13)
+  return False
+
+# sum_of_numbers_that_cannot_be_written_as_sum_of_two_abundant_numbers was too big
+def non_abundant_sums(upper_bound):
+  abundant_numbers = []
+  index = 0
+  abundant_numbers_lookup = {}
+
+  total = 0
+  for n in range(1, upper_bound):
+    if is_abundant(n):
+      abundant_numbers.append(n)
+      abundant_numbers_lookup[n] = index
+      index += 1
+
+    if not can_be_written_as_sum(n, abundant_numbers, abundant_numbers_lookup):
+      total += n
+
+  return total
+
+
+print non_abundant_sums(28123)
