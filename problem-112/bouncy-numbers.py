@@ -12,21 +12,10 @@
 #
 # Find the least number for which the proportion of bouncy numbers is exactly 99%.
 def is_bouncy(number):
-  decreasing = True
-  increasing = True
+  number = str(number)
+  sorted_number = sorted(number)
 
-  numbers = list(str(number))
-  numbers = map((lambda x: int(x)), numbers)
-  last = numbers[0]
-  for i in range(1, len(numbers)):
-    if last > numbers[i]:
-      increasing = False
-    elif last < numbers[i]:
-      decreasing = False
-
-    last = numbers[i]
-
-  return not decreasing and not increasing
+  return "".join(sorted_number) != number and "".join(reversed(sorted_number)) != number
 
 def least_number_with_bouncy_percentage(percentage):
   current = 1
