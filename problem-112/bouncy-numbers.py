@@ -28,3 +28,18 @@ def is_bouncy(number):
 
   return not decreasing and not increasing
 
+def least_number_with_bouncy_percentage(percentage):
+  current = 1
+  bouncy_numbers = 0.0
+
+  while True:
+    if is_bouncy(current):
+      bouncy_numbers += 1
+
+    if (bouncy_numbers / current) * 100 == percentage:
+      return current
+
+    current += 1
+
+print least_number_with_bouncy_percentage(99)
+
