@@ -9,8 +9,12 @@ int main() {
   char buffer[BUFFER_SIZE];
   FILE *fp;
 
-  if ((fp = fopen("matrix.txt", "r"))) {
-    fgets(buffer, sizeof(char) * BUFFER_SIZE, fp);
+  if ((fp = fopen("matrix.txt", "r")) == NULL) {
+    printf("Failed opening file\n");
+  }
+
+
+  while (fgets(buffer, sizeof(char) * BUFFER_SIZE, fp)) {
     printf("%s", buffer);
   }
 
