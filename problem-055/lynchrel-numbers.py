@@ -22,3 +22,30 @@ def is_palindrome(number):
   str_number = str(number)
   return str_number == str_number[::-1]
 
+def is_number_plus_reverse_palindromic(number):
+  str_number = str(number)
+  str_reverse = str_number[::-1]
+
+  return is_palindrome(number + int(str_reverse))
+
+def find_lychrel_numbers(until, max_iterations):
+  total_lychrel_numbers = until
+
+  for number in range(1, until + 1):
+    tests = []
+    curr_number = number
+    curr_iteration = 0
+
+    while curr_iteration < max_iterations:
+      if is_number_plus_reverse_palindromic(curr_number):
+        total_lychrel_numbers -= 1
+        break
+      else:
+        curr_number += int(str(curr_number)[::-1])
+
+      curr_iteration += 1
+
+  return total_lychrel_numbers
+
+
+print find_lychrel_numbers(10000, 50)
