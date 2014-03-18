@@ -11,32 +11,34 @@
 #
 # How many starting numbers below ten million will arrive at 89?
 
-will_arrive_at_1 = set()
-will_arrive_at_89 = set()
+
+ARRAY_SIZE = 568
+# maximum number after calculating the next number is 567
+# that is for 9^2 * 7 = 567, for number 9999999
+last_number = [0] * ARRAY_SIZE
+
+# base cases
+last_number[1] = 1
+last_number[89] = 89
 
 def next_number_in_chain(number):
   return sum( map(lambda x: x * x, map(int, list(str(number))) ) )
 
-def last_digit_chain(number):
-  if number == 1 or number in will_arrive_at_1:
-    return 1
-  if number == 89 or number in will_arrive_at_89:
-    return 89
+def last_number_chain(number):
+  if number < ARRAY_SIZE and last_number[number] != 0:
+    return last_number[number]
+  else:
+    last = last_number_chain(next_number_in_chain(number))
+    if number < ARRAY_SIZE:
+      last_number[number] = last
+    return last
 
-  next = next_number_in_chain(number)
-  last_digit = last_digit_chain(next)
-
-  if last_digit == 1:
-    will_arrive_at_1.add(number)
-
-  if last_digit == 89:
-    will_arrive_at_89.add(number)
-
-  return last_digit
 
 total = 0
-for i in range(1, 10000000):
-  if last_digit_chain(i) == 89:
+i = 1
+while i < 10000000:
+  if last_number_chain(i) == 89:
     total += 1
+  i += 1
 
 print total
