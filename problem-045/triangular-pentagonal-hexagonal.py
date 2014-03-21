@@ -15,10 +15,12 @@ from math import sqrt
 def triangle_number(n):
   return (n * (n + 1)) / 2
 
+# formula taken from http://en.wikipedia.org/wiki/Pentagonal_number
 def is_pentagonal(number):
   n = (sqrt(number * 24 + 1) + 1) / 6
   return is_natural(n)
 
+# formula taken from http://en.wikipedia.org/wiki/Hexagonal_number
 def is_hexagonal(number):
   n = (sqrt(number * 8 + 1) + 1) / 4
   return is_natural(n)
