@@ -26,6 +26,9 @@ def maximized_solution(max_perimeter):
   perimeter_triplets = {}
   m = 2
 
+  max_triplets = 0
+  perimeter_with_max_triplets = 0
+
   # find triplets and perimeters
   # while they may obey the invariant perimeter < max_perimeter
   while perimeter_for(pythagorean_triplet(m, 1)) <= max_perimeter:
@@ -42,29 +45,22 @@ def maximized_solution(max_perimeter):
           break
 
         add_triplet_for_perimeter(perimeter_triplets, perimeter, derived_triplet)
+
+        current_perimeter_triplets_length = len(perimeter_triplets[perimeter])
+        if current_perimeter_triplets_length > max_triplets:
+          max_triplets = current_perimeter_triplets_length
+          perimeter_with_max_triplets = perimeter
+
         modifier += 1
 
     m += 1
 
-  return max_triplets_perimeter(perimeter_triplets)
+  return perimeter_with_max_triplets
 
 def add_triplet_for_perimeter(perimeter_triplets, perimeter, triplet):
   if perimeter not in perimeter_triplets:
     perimeter_triplets[perimeter] = set()
 
   perimeter_triplets[perimeter].add(frozenset(triplet))
-
-def max_triplets_perimeter(perimeter_triplets):
-  max_triplets = 0
-  perimeter = 0
-
-  for curr in perimeter_triplets:
-    curr_triplets = len(perimeter_triplets[curr])
-    if max_triplets < curr_triplets:
-      max_triplets = curr_triplets
-      perimeter = curr
-
-  return perimeter
-
 
 print maximized_solution(1000)
