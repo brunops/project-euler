@@ -29,25 +29,20 @@ def maximized_solution(max_perimeter):
   # find triplets and perimeters
   # while they may obey the invariant perimeter < max_perimeter
   while perimeter_for(pythagorean_triplet(m, 1)) <= max_perimeter:
-
     for n in range(1, m):
       triplet = pythagorean_triplet(m, n)
-      perimeter = perimeter_for(triplet)
-
-      add_triplet_for_perimeter(perimeter_triplets, perimeter, triplet)
-
-      modifier = 2
+      modifier = 1
 
       # find all combinations for given triplet
       while True:
         derived_triplet = derive_triplet(triplet, modifier)
         perimeter = perimeter_for(derived_triplet)
 
-        if perimeter <= max_perimeter:
-          add_triplet_for_perimeter(perimeter_triplets, perimeter, derived_triplet)
-          modifier += 1
-        else:
+        if perimeter > max_perimeter:
           break
+
+        add_triplet_for_perimeter(perimeter_triplets, perimeter, derived_triplet)
+        modifier += 1
 
     m += 1
 
