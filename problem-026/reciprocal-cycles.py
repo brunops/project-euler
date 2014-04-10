@@ -34,7 +34,10 @@ def reciprocal_cycle_size(number):
 
 max_number = 1
 max_size = 0
-for i in range(1, 1001):
+for i in reversed(range(1, 1001)):
+  if max_size > i:
+    break
+
   curr_size = reciprocal_cycle_size(i)
   if curr_size > max_size:
     max_size = curr_size
